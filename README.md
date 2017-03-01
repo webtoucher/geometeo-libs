@@ -42,30 +42,49 @@ Then you can calculate needed data with one of calculators and time grid.
 
 ```php
     $inputValuesGrid = [
-        '2017-03-02 19:00:00' => [],
-        '2017-03-02 19:01:00' => [],
-        '2017-03-02 19:02:00' => [],
-        '2017-03-02 19:03:00' => [],
-        '2017-03-02 19:04:00' => [],
+        '2017-03-02 19:00:00' => [
+            'power' => 20
+        ],
+        '2017-03-02 19:01:00' => [
+            'power' => 20
+        ],
+        '2017-03-02 19:02:00' => [
+            'power' => 20
+        ],
+        '2017-03-02 19:03:00' => [
+            'power' => 20
+        ],
+        '2017-03-02 19:04:00' => [
+            'power' => 20
+        ],
     ];
-    $sunPower = $provider->calculate(new SunCalculator(SunCalculator::POWER), $inputValuesGrid);
+    $calculator = new SunCalculator(SunCalculator::AZIMUTH|SunCalculator::ELEVATION, [
+        'param1' => 'value1',
+        'param2' => 'value2',
+    ]);
+    $outputValuesGrid = $provider->calculate($calculator, $inputValuesGrid);
 
-    // Result:
-    // $sunPower = [
+    // $outputValuesGrid:
+    // [
     //     '2017-03-02 19:00:00' => [
-    //         SunCalculator::POWER => 50,
+    //         SunCalculator::AZIMUTH => 220,
+    //         SunCalculator::ELEVATION => 50,
     //     ],
     //     '2017-03-02 19:01:00' => [
-    //         SunCalculator::POWER => 50,
+    //         SunCalculator::AZIMUTH => 220,
+    //         SunCalculator::ELEVATION => 50,
     //     ],
     //     '2017-03-02 19:02:00' => [
-    //         SunCalculator::POWER => 50,
+    //         SunCalculator::AZIMUTH => 220,
+    //         SunCalculator::ELEVATION => 50,
     //     ],
     //     '2017-03-02 19:03:00' => [
-    //         SunCalculator::POWER => 50,
+    //         SunCalculator::AZIMUTH => 220,
+    //         SunCalculator::ELEVATION => 50,
     //     ],
     //     '2017-03-02 19:04:00' => [
-    //         SunCalculator::POWER => 50,
+    //         SunCalculator::AZIMUTH => 220,
+    //         SunCalculator::ELEVATION => 50,
     //     ],
     // ];
 ```
