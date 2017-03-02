@@ -30,12 +30,21 @@ to the ```require``` section of your `composer.json` file.
 ```php
     use \webtoucher\geometeo\libs\GeoDataProvider;
     use \webtoucher\geometeo\libs\SunCalculator;
+    use \webtoucher\geometeo\libs\Coordinate;
 ```
 
 Create and configure data provider for selected geoposition.
 
 ```php
-    $provider = new GeoDataProvider(486010.25, 4221916.21);
+    $provider = new GeoDataProvider(55.012207, 83.289468);
+```
+or
+
+```php
+    $provider = new GeoDataProvider(
+        Coordinate::fromDms(55, 0, 43.945199999987, Coordinate::NORTH),
+        Coordinate::fromDms(83, 17, 22.084799999998, Coordinate::EAST)
+    );
 ```
 
 Then you can calculate needed data with one of calculators and time grid.
