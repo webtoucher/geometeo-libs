@@ -25,6 +25,8 @@ class GeoDataProvider
     }
 
     /**
+     * Returns calculated params time grid.
+     *
      * @param Calculator $calculator
      * @param array $inputValuesGrid
      * @return array
@@ -33,8 +35,28 @@ class GeoDataProvider
     {
         $outputValuesGrid = [];
         foreach ($inputValuesGrid as $date => $inputValues) {
-            $outputValuesGrid[$date] = $calculator->calculate($this, $date, $inputValues);
+            $outputValuesGrid[$date] = $calculator->calculate($this, new \DateTime($date), $inputValues);
         }
         return $outputValuesGrid;
+    }
+
+    /**
+     * Returns latitude.
+     *
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Returns longitude.
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
     }
 }

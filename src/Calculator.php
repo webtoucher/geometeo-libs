@@ -12,7 +12,7 @@ abstract class Calculator
     /**
      * @var array
      */
-    private $fields = [];
+    protected $fields = [];
 
     /**
      * @param integer $fields Bit mask of fields or NULL for all fields.
@@ -45,15 +45,17 @@ abstract class Calculator
         $this->resetData();
         $fields = array_keys($this->fields);
         foreach ($fields as $field) {
-            $this->fields[$field] = $this->calculateField($provider, $field, $date, $inputValues);
+            $this->calculateField($provider, $field, $date, $inputValues);
         }
         return $this->fields;
     }
 
     /**
      * Clear all fields.
+     *
+     * @return void
      */
-    private function resetData()
+    protected function resetData()
     {
         $this->fields = array_fill_keys(array_keys($this->fields), null);
     }
@@ -63,11 +65,13 @@ abstract class Calculator
      * @param integer $field
      * @param string $date
      * @param array $inputValues
-     * @return mixed
+     * @return void
      */
     abstract protected function calculateField(GeoDataProvider $provider, $field, $date, array $inputValues);
 
     /**
+     * Returns the list of the available for calculation parameters.
+     *
      * @return integer[]
      */
     abstract protected function getFieldRoster();
