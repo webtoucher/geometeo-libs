@@ -36,14 +36,15 @@ to the ```require``` section of your `composer.json` file.
 Create and configure data provider for selected geoposition.
 
 ```php
-    $provider = new GeoDataProvider(55.012207, 83.289468);
+    $provider = new GeoDataProvider(55.012207, 83.289468, 'Asia/Novosibirsk');
 ```
 or
 
 ```php
     $provider = new GeoDataProvider(
         Coordinate::fromDms(55, 0, 43.945199999987, Coordinate::NORTH),
-        Coordinate::fromDms(83, 17, 22.084799999998, Coordinate::EAST)
+        Coordinate::fromDms(83, 17, 22.084799999998, Coordinate::EAST),
+        'Asia/Novosibirsk'
     );
 ```
 

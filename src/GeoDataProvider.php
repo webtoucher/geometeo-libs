@@ -15,13 +15,22 @@ class GeoDataProvider
     private $longitude;
 
     /**
+     * @var \DateTimeZone
+     */
+    private $dataTimeZone;
+
+    /**
      * @param float|Coordinate $latitude
      * @param float|Coordinate $longitude
+     * @param string $dataTimeZone
      */
-    public function __construct($latitude, $longitude)
+    public function __construct($latitude, $longitude, $dataTimeZone = null)
     {
         $this->latitude = $latitude instanceof Coordinate ? $latitude->decimal : $latitude;
         $this->longitude = $longitude instanceof Coordinate ? $longitude->decimal : $longitude;
+        if ($dataTimeZone) {
+            $this->dataTimeZone = new \DateTimeZone($dataTimeZone);
+        }
     }
 
     /**
@@ -35,7 +44,7 @@ class GeoDataProvider
     {
         $outputValuesGrid = [];
         foreach ($inputValuesGrid as $date => $inputValues) {
-            $outputValuesGrid[$date] = $calculator->calculate($this, new \DateTime($date), $inputValues);
+            $outputValuesGrid[$date] = $calculator->calculate($this, new \DateTime($date, $this->dataTimeZone), $inputValues);
         }
         return $outputValuesGrid;
     }
